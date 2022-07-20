@@ -10,8 +10,8 @@ public class Frame {
 
     private final List<Integer> balls = new ArrayList<>();
 
-    private int numberOfSkittles;
-    private int numberOfBalls;
+    private final int numberOfSkittles;
+    private final int numberOfBalls;
 
     public Frame(int numberOfSkittles, int numberOfBalls) {
         this.numberOfSkittles = numberOfSkittles;
@@ -20,14 +20,6 @@ public class Frame {
 
     public List<Integer> getBalls() {
         return balls;
-    }
-
-    public void setNumberOfBalls(int numberOfBalls) {
-        this.numberOfBalls = numberOfBalls;
-    }
-
-    public void setNumberOfSkittles(int numberOfSkittles) {
-        this.numberOfSkittles = numberOfSkittles;
     }
 
     public boolean isSpare() {

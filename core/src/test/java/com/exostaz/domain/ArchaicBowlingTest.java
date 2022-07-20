@@ -236,10 +236,28 @@ class ArchaicBowlingTest {
         for (int i = 0; i <= 14; i++) {
             game.play(4);
         }
-//        assertTrue(game.isLastFrame());
-//        assertTrue(game.isFinished());
+        assertTrue(game.isFinished());
         assertEquals(5, game.getFrames().size());
         assertEquals(60, game.calculateScore());
+    }
+
+    @Test
+    @DisplayName("5 frames, last is spare in 2 balls")
+    void playFiveFramesWithSpareAtLastFrame() {
+        assertEquals(1, game.getFrames().size());
+        for (int i = 0; i <= 11; i++) {
+            game.play(4);
+        }
+        assertEquals(5, game.getFrames().size());
+        game.play(5);
+        game.play(10);
+        game.play(9);
+        //assertFalse(game.isFinished());
+        game.play(6);
+
+        //assertTrue(game.isFinished());
+        assertEquals(5, game.getFrames().size());
+        assertEquals(78, game.calculateScore());
     }
 
     @Test

@@ -1,6 +1,6 @@
 package com.exostaz.data;
 
-import com.exostaz.data.db.PseudoCacheDB;
+import com.exostaz.data.db.MockDB;
 import com.exostaz.domain.Configuration;
 
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.Map;
 public class ConfigurationDAO {
 
     public Configuration get(String id) {
-        Map<String, Integer> config = PseudoCacheDB.BOWLING_CONFIG.get(id);
+        Map<String, Integer> config = MockDB.BOWLING_CONFIG.get(id);
 
         return new Configuration(
                 config.get("numberOfFrames"),
@@ -21,6 +21,6 @@ public class ConfigurationDAO {
     }
 
     public List<String> getAllGameTypes() {
-        return PseudoCacheDB.BOWLING_CONFIG.keySet().stream().toList();
+        return MockDB.BOWLING_CONFIG.keySet().stream().toList();
     }
 }

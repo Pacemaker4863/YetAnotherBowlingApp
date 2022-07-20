@@ -3,7 +3,7 @@ package com.exostaz.data.db;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PseudoCacheDB {
+public class MockDB {
 
   private static final Map<String, Integer> archaic = new HashMap<String, Integer>() {{
     put("numberOfFrames", 5);

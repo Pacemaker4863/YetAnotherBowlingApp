@@ -31,23 +31,24 @@ public class Game {
         if (currentFrame.isFinished() && frames.size() <= rules.numberOfFrames() - 1) {
             frames.add(new Frame(rules.numberOfSkittles(), rules.numberOfBallsPerFrame()));
         }
+
+        System.out.println("Game is finished? " + this.isFinished());
     }
 
-//    public boolean isFinished() {
-//        if (this.isLastFrame()) {
-//            var lastFrame = frames.get(rules.numberOfFrames() - 2);
-//            if (lastFrame.isStrike() || lastFrame.isSpare()) {
-//                return lastFrame.getBalls().size() == rules.numberOfBallsPerFrame() + 1;
-//            } else {
-//                return lastFrame.getBalls().size() == rules.numberOfBallsPerFrame() ;
-//            }
-//        }
-//        return false;
-//    }
+    public boolean isFinished() {
+        if (this.frames.size() == rules.numberOfFrames()) {
+            var lastFrame = frames.get(rules.numberOfFrames() - 1);
+            if (lastFrame.isStrike() || lastFrame.isSpare()) {
+                return lastFrame.getBalls().size() == rules.numberOfBallsPerFrame() + 1;
+            } else {
+                return lastFrame.getBalls().size() == rules.numberOfBallsPerFrame() ;
+            }
+        }
+        return false;
+    }
 
     private int getBonusPointsForFrame(int numberOfBonusBalls, int moreBalls, int from) {
         int to = from + Math.min(moreBalls, numberOfBonusBalls);
-//        System.out.println("sublist from " + from + " to " + to);
         return balls.subList(from, from + Math.min(moreBalls, numberOfBonusBalls))
                 .stream()
                 .mapToInt(Integer::intValue)
@@ -66,7 +67,9 @@ public class Game {
 
             System.out.printf("frame number %d%n", i + 1);
 
-            if (currentFrame.isHole() || !currentFrame.isFinished() || i == rules.numberOfFrames() - 1) {
+            boolean lastFrame = i == rules.numberOfFrames() - 1;
+
+            if (currentFrame.isHole() || !currentFrame.isFinished() || lastFrame) {
 
                 System.out.println("hole? " + currentFrame.isHole());
                 System.out.println("strike? " + currentFrame.isStrike());

@@ -1,37 +1,28 @@
 package com.exostaz.domain;
 
-import lombok.ToString;
+import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@ToString
+@Data
 public class Frame {
 
     private final List<Integer> balls = new ArrayList<>();
 
-    private final int numberOfSkittles;
-    private final int numberOfBalls;
+    private final int numberOfPins;
+    private int numberOfBalls;
 
-    public Frame(int numberOfSkittles, int numberOfBalls) {
-        this.numberOfSkittles = numberOfSkittles;
+    private int bonusBalls;
+
+    private boolean strike;
+    private boolean spare;
+    private boolean hole;
+    private boolean finished;
+
+    public Frame(int numberOfPins, int numberOfBalls) {
+        this.numberOfPins = numberOfPins;
         this.numberOfBalls = numberOfBalls;
-    }
-
-    public List<Integer> getBalls() {
-        return balls;
-    }
-
-    public boolean isSpare() {
-        return this.getScore() == numberOfSkittles && this.getBalls().size() > 1;
-    }
-
-    public boolean isStrike() {
-        return !this.getBalls().isEmpty() && this.getBalls().get(0) == numberOfSkittles;
-    }
-
-    public boolean isHole() {
-        return this.getScore() != numberOfSkittles && this.getBalls().size() == numberOfBalls;
     }
 
     public boolean isFinished() {

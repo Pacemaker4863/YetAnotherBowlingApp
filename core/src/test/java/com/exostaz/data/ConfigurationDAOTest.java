@@ -15,7 +15,7 @@ class ConfigurationDAOTest {
     void getArchaic() {
         ConfigurationDAO dao = new ConfigurationDAO();
         Configuration rules = dao.get("archaic");
-        assertEquals(15, rules.numberOfSkittles());
+        assertEquals(15, rules.numberOfPins());
         assertEquals(3, rules.numberOfBallsPerFrame());
         assertEquals(2, rules.bonusRollsForSpare());
         assertEquals(3, rules.bonusRollsForStrike());
@@ -28,7 +28,7 @@ class ConfigurationDAOTest {
         ConfigurationDAO dao = new ConfigurationDAO();
 
         Configuration rules = dao.get("classic");
-        assertEquals(10, rules.numberOfSkittles());
+        assertEquals(10, rules.numberOfPins());
         assertEquals(2, rules.numberOfBallsPerFrame());
         assertEquals(1, rules.bonusRollsForSpare());
         assertEquals(2, rules.bonusRollsForStrike());

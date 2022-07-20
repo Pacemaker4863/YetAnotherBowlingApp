@@ -13,7 +13,7 @@ public class ConfigurationDAO {
 
         return new Configuration(
                 config.get("numberOfFrames"),
-                config.get("numberOfSkittles"),
+                config.get("numberOfPins"),
                 config.get("numberOfBallsPerFrame"),
                 config.get("bonusBallsForStrike"),
                 config.get("bonusBallsForSpare")

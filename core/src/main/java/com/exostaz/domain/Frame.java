@@ -27,7 +27,7 @@ public class Frame {
     }
 
     public boolean isStrike() {
-        return this.getScore() == numberOfSkittles && this.getBalls().size() == 1;
+        return !this.getBalls().isEmpty() && this.getBalls().get(0) == numberOfSkittles;
     }
 
     public boolean isHole() {

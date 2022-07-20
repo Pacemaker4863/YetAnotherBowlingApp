@@ -33,10 +33,6 @@ public class Game {
         }
     }
 
-//    public boolean isLastFrame() {
-//        return this.frames.size() == 5;
-//    }
-//
 //    public boolean isFinished() {
 //        if (this.isLastFrame()) {
 //            var lastFrame = frames.get(rules.numberOfFrames() - 2);
@@ -67,28 +63,28 @@ public class Game {
             var currentFrame = frames.get(i);
             currentNumberOfBalls += currentFrame.getBalls().size();
             int moreBalls = totalNumberOfBalls - currentNumberOfBalls;
-            System.out.println("Frame number " + i);
 
-//            System.out.println("Game is finished = " + this.isFinished());
+            System.out.printf("frame number %d%n", i + 1);
 
-            if (currentFrame.isHole() || !currentFrame.isFinished()) {
-//                System.out.println(currentFrame.isHole());
-//                System.out.println(currentFrame.isStrike());
-//                System.out.println(currentFrame.isSpare());
-//                System.out.println(!currentFrame.isFinished());
-//                System.out.println("Hole number " + i);
+            if (currentFrame.isHole() || !currentFrame.isFinished() || i == rules.numberOfFrames() - 1) {
+
+                System.out.println("hole? " + currentFrame.isHole());
+                System.out.println("strike? " + currentFrame.isStrike());
+                System.out.println("spare? " + currentFrame.isSpare());
+                System.out.println("finished? " + currentFrame.isFinished());
+
                 score += currentFrame.getScore();
             } else if (currentFrame.isSpare()) {
                 score += rules.numberOfSkittles() + getBonusPointsForFrame(rules.bonusRollsForSpare(),
                         moreBalls,
                         currentNumberOfBalls);
             } else if (currentFrame.isStrike()) {
-//                System.out.println("Strike number " + i);
+                System.out.printf("Strike number %d%n", i + 1);
                 score += rules.numberOfSkittles() + getBonusPointsForFrame(rules.bonusRollsForStrike(),
                         moreBalls,
                         currentNumberOfBalls);
             }
-//            System.out.println();
+            System.out.println();
         }
         return score;
     }

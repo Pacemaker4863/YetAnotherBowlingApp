@@ -5,9 +5,10 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.IntStream;
 
 public class Game {
-    
+
     private final List<Frame> frames;
     private final List<Integer> balls;
     private boolean finished;
@@ -85,10 +86,10 @@ public class Game {
         }
     }
 
-    public List<Frame> getAdjustedFrames() {
+    private List<Frame> getAdjustedFrames() {
         int totalNumberOfBalls = balls.size();
         AtomicInteger ballsIndex = new AtomicInteger();
-        for (int i = 0; i <= frames.size() - 1; i++) {
+        IntStream.range(0, frames.size()).forEach(i -> {
             var currentFrame = frames.get(i);
             ballsIndex.addAndGet(currentFrame.getBalls().size());
             int moreBalls = totalNumberOfBalls - ballsIndex.get();
@@ -96,7 +97,7 @@ public class Game {
                 int to = ballsIndex.get() + Math.min(moreBalls, currentFrame.getNumberOfBonusBalls());
                 currentFrame.setBonusBalls(balls.subList(ballsIndex.get(), to));
             }
-        }
+        });
         return frames;
     }
 

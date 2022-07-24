@@ -165,6 +165,7 @@ class ClassicBowlingTest {
 
         assertEquals(3, game.getFrames().size());
         assertTrue(game.getFrames().get(1).isFinished());
+        assertFalse(game.isFinished());
         assertEquals(22, game.calculateScore());
     }
 
@@ -206,8 +207,10 @@ class ClassicBowlingTest {
     void allStrikes() {
         assertEquals(1, game.getFrames().size());
         for (int i = 0; i <= 11; i++) {
+            assertFalse(game.isFinished());
             game.play(10);
         }
+        assertTrue(game.isFinished());
         assertEquals(10, game.getFrames().size());
         assertEquals(300, game.calculateScore());
     }

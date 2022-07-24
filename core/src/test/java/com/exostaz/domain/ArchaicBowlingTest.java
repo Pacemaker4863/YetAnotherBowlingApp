@@ -237,15 +237,14 @@ class ArchaicBowlingTest {
         for (int i = 0; i <= 14; i++) {
             game.play(4);
         }
-        // todo test again
-        //assertTrue(game.isFinished());
+        assertTrue(game.isFinished());
         assertEquals(5, game.getFrames().size());
         assertEquals(60, game.calculateScore());
     }
 
     @Test
     @DisplayName("5 frames, last is spare in 2 balls")
-    void playFiveFramesWithSpareAtLastFrame() {
+    void playFiveFramesWithSpare2BallsAtLastFrame() {
         assertEquals(1, game.getFrames().size());
         for (int i = 0; i <= 11; i++) {
             game.play(4);
@@ -254,12 +253,32 @@ class ArchaicBowlingTest {
         game.play(5);
         game.play(10);
         game.play(9);
-        //assertFalse(game.isFinished());
+        assertFalse(game.isFinished());
         game.play(6);
+        assertTrue(game.isFinished());
+
+        assertEquals(5, game.getFrames().size());
+        assertEquals(78, game.calculateScore());
+    }
+
+    @Test
+    @DisplayName("5 frames, last is spare in 3 balls")
+    void playFiveFramesWithSpare3BallsAtLastFrame() {
+        assertEquals(1, game.getFrames().size());
+        for (int i = 0; i <= 11; i++) {
+            game.play(4);
+        }
+        assertEquals(5, game.getFrames().size());
+        game.play(5);
+        game.play(7);
+        game.play(3);
+        assertFalse(game.isFinished());
+        game.play(6);
+        assertTrue(game.isFinished());
 
         //assertTrue(game.isFinished());
         assertEquals(5, game.getFrames().size());
-        assertEquals(78, game.calculateScore());
+        assertEquals(69, game.calculateScore());
     }
 
     @Test
@@ -269,6 +288,7 @@ class ArchaicBowlingTest {
         for (int i = 0; i <= 7; i++) {
             game.play(15);
         }
+        assertTrue(game.isFinished());
         assertEquals(5, game.getFrames().size());
         assertEquals(300, game.calculateScore());
     }
@@ -291,7 +311,9 @@ class ArchaicBowlingTest {
         game.play(2); // 9
         game.play(5);
         game.play(3);
+        assertFalse(game.isFinished());
         game.play(2); // 10
+        assertTrue(game.isFinished());
         assertEquals(55, game.calculateScore());
     }
 

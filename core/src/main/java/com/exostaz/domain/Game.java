@@ -17,7 +17,6 @@ public class Game {
     private final int bonusBallsForStrike;
     private final int bonusBallsForSpare;
 
-
     public Game(@NotNull Configuration rules) {
         this.totalNumberOfPins = rules.numberOfPins();
         this.numberOfBallsPerFrame = rules.numberOfBallsPerFrame();
@@ -59,7 +58,7 @@ public class Game {
                     this.finished = true;
                 }
             } else {
-                currentFrame.setBonusBalls(bonusBallsForStrike);
+                currentFrame.setNumberOfBonusBalls(bonusBallsForStrike);
                 frames.add(new Frame(totalNumberOfPins, numberOfBallsPerFrame));
             }
         } else if (currentFrame.isFlaggedAsSpare()) {
@@ -71,7 +70,7 @@ public class Game {
                     this.finished = true;
                 }
             } else {
-                currentFrame.setBonusBalls(bonusBallsForSpare);
+                currentFrame.setNumberOfBonusBalls(bonusBallsForSpare);
                 frames.add(new Frame(totalNumberOfPins, numberOfBallsPerFrame));
             }
         } else if (currentFrame.isHole()) {
@@ -93,9 +92,9 @@ public class Game {
             var currentFrame = frames.get(i);
             ballsIndex.addAndGet(currentFrame.getBalls().size());
             int moreBalls = totalNumberOfBalls - ballsIndex.get();
-            if (currentFrame.getBonusBalls() > 0) {
-                int to = ballsIndex.get() + Math.min(moreBalls, currentFrame.getBonusBalls());
-                currentFrame.setBonusBallsList(balls.subList(ballsIndex.get(), to));
+            if (currentFrame.getNumberOfBonusBalls() > 0) {
+                int to = ballsIndex.get() + Math.min(moreBalls, currentFrame.getNumberOfBonusBalls());
+                currentFrame.setBonusBalls(balls.subList(ballsIndex.get(), to));
             }
         }
         return frames;

@@ -4,18 +4,17 @@ import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Data
 public class Frame {
 
     private final List<Integer> balls = new ArrayList<>();
+    private List<Integer> bonusBalls = new ArrayList<>();
 
-    private List<Integer> bonusBallsList = new ArrayList<>();
     private final int numberOfPins;
     private int numberOfBalls;
-    private int bonusBalls;
+    private int numberOfBonusBalls;
     private boolean strike;
     private boolean spare;
     private boolean hole;
@@ -43,7 +42,6 @@ public class Frame {
     }
 
     public int getScore() {
-        return Stream.concat(balls.stream(), bonusBallsList.stream()).mapToInt(Integer::intValue).sum();
+        return Stream.concat(balls.stream(), bonusBalls.stream()).mapToInt(Integer::intValue).sum();
     }
-
 }

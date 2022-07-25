@@ -1,3 +1,4 @@
-FROM openjdk:17
+FROM openjdk:latest
 MAINTAINER Gregory Risch <g6@exostaz.com>
-
+ADD /target/core-0.7.3-RC.jar bowling.jar
+ENTRYPOINT ["java","-jar","bowling.jar"]

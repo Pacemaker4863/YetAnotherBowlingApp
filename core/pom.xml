@@ -6,8 +6,8 @@
 
     <groupId>com.exostaz</groupId>
     <artifactId>core</artifactId>
-    <version>0.1-SNAPSHOT</version>
-    <packaging>pom</packaging>
+    <version>0.7.3-RC</version>
+    <packaging>jar</packaging>
 
     <properties>
         <maven.compiler.source>18</maven.compiler.source>
@@ -43,23 +43,40 @@
         </dependency>
     </dependencies>
 
-    <distributionManagement>
-        <repository>
-            <id>space-maven</id>
-            <url>https://maven.pkg.jetbrains.space/exostaz/p/bowlingapp/maven</url>
-        </repository>
-    </distributionManagement>
-
-    <repositories>
-        <repository>
-            <id>space-maven</id>
-            <url>https://maven.pkg.jetbrains.space/exostaz/p/bowlingapp/maven</url>
-        </repository>
-    </repositories>
-
     <build>
 
         <plugins>
+
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>1.2.2</version>
+                <configuration>
+                    <imageName>springdocker</imageName>
+                    <baseImage>java</baseImage>
+                    <entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint>
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <mainClass>com.exostaz.ConsoleUI</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
 
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>

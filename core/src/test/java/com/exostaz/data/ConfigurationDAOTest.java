@@ -14,7 +14,7 @@ class ConfigurationDAOTest {
     @Test
     void getArchaic() {
         ConfigurationDAO dao = new ConfigurationDAO();
-        Configuration rules = dao.get("archaic");
+        Configuration rules = dao.get("Archaic");
         assertEquals(15, rules.numberOfPins());
         assertEquals(3, rules.numberOfBallsPerFrame());
         assertEquals(2, rules.bonusRollsForSpare());
@@ -27,7 +27,7 @@ class ConfigurationDAOTest {
     void getClassic() {
         ConfigurationDAO dao = new ConfigurationDAO();
 
-        Configuration rules = dao.get("classic");
+        Configuration rules = dao.get("Classic");
         assertEquals(10, rules.numberOfPins());
         assertEquals(2, rules.numberOfBallsPerFrame());
         assertEquals(1, rules.bonusRollsForSpare());
@@ -35,14 +35,14 @@ class ConfigurationDAOTest {
         assertEquals(10, rules.numberOfFrames());
     }
 
+
     @DisplayName("Get Get the different types of bowling games")
     @Test
     void getGameConfigs() {
         ConfigurationDAO dao = new ConfigurationDAO();
-
         List<String> gameTypes = dao.getAllGameTypes();
         assertEquals(2, gameTypes.size());
-        assertTrue(gameTypes.contains("classic"));
-        assertTrue(gameTypes.contains("archaic"));
+        assertTrue(gameTypes.contains("Classic"));
+        assertTrue(gameTypes.contains("Archaic"));
     }
 }

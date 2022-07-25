@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Data
@@ -30,11 +31,11 @@ public class Frame {
     }
 
     public boolean isFlaggedAsSpare() {
-        return getBalls().size() <= numberOfBalls && getScore() == numberOfPins || isSpare();
+        return !getBalls().isEmpty() && getBalls().size() <= numberOfBalls && getScore() == numberOfPins || isSpare();
     }
 
     public boolean isHole() {
-        return getBalls().size() == numberOfBalls && getScore() <= numberOfPins;
+        return !getBalls().isEmpty() && getBalls().size() == numberOfBalls && getScore() <= numberOfPins;
     }
 
     public boolean isFinished() {
@@ -43,5 +44,9 @@ public class Frame {
 
     public int getScore() {
         return Stream.concat(balls.stream(), bonusBalls.stream()).mapToInt(Integer::intValue).sum();
+    }
+
+    public String toString() {
+        return balls + " " + bonusBalls + " " + this.getScore();
     }
 }

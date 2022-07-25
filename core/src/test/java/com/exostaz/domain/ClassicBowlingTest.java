@@ -56,7 +56,7 @@ class ClassicBowlingTest {
 
     @BeforeEach
     void setUp() {
-        game = new Game(GameManager.getGameConfiguration("classic"));
+        game = new Game(GameManager.getGameConfiguration("Classic"));
     }
 
     @Test

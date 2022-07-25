@@ -102,6 +102,7 @@ public class Game {
     }
 
     public int calculateScore() {
+//        getAdjustedFrames().forEach(System.out::println);
         return getAdjustedFrames().stream().mapToInt(Frame::getScore).sum();
     }
 }

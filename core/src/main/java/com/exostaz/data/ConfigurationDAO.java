@@ -10,7 +10,6 @@ public class ConfigurationDAO {
 
     public Configuration get(String id) {
         Map<String, Integer> config = MockDB.BOWLING_CONFIG.get(id);
-
         return new Configuration(
                 config.get("numberOfFrames"),
                 config.get("numberOfPins"),

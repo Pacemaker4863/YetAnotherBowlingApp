@@ -62,12 +62,12 @@ class ArchaicBowlingTest {
 
     @BeforeEach
     void setUp() {
-        game = new Game(GameManager.getGameConfiguration("archaic"));
+        game = new Game(GameManager.getGameConfiguration("Archaic"));
     }
 
     @Test
     @DisplayName("throw 1 ball")
-    void throwOneBall() {
+    public void throwOneBall() {
         assertEquals(1, game.getFrames().size());
         game.play(5);
         assertEquals(1, game.getFrames().size());

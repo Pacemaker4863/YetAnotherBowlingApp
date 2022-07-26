@@ -1,6 +1,7 @@
 package com.exostaz.domain;
 
-import com.exostaz.services.GameManager;
+import com.exostaz.server.domain.Game;
+import com.exostaz.server.services.GameManager;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

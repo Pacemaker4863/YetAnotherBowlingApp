@@ -1,6 +1,7 @@
 package com.exostaz.domain;
 
-import com.exostaz.services.GameManager;
+import com.exostaz.server.domain.Game;
+import com.exostaz.server.services.GameManager;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -95,8 +96,10 @@ class ArchaicBowlingTest {
     void throwTwoBallsAndSpare() {
         assertEquals(1, game.getFrames().size());
         game.play(5);
+        assertTrue(game.getFrames().get(0).getBalls().size() == 1);
         assertEquals(1, game.getFrames().size());
         game.play(10);
+        assertTrue(game.getFrames().get(0).getBalls().size() == 2);
         assertEquals(2, game.getFrames().size());
         assertTrue(game.getFrames().get(0).isFinished());
         assertTrue(game.getFrames().get(0).isSpare());

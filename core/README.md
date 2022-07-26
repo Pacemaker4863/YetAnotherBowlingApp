@@ -1,1 +1,1 @@
-# coreBowling
+# Core Bowling

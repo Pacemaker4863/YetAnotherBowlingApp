@@ -1,6 +1,7 @@
 package com.exostaz.data;
 
-import com.exostaz.domain.Configuration;
+import com.exostaz.server.domain.Configuration;
+import com.exostaz.server.data.ConfigurationDAO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

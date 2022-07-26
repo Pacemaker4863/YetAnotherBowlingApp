@@ -47,6 +47,7 @@ public class Frame {
     }
 
     public String toString() {
-        return balls + " " + bonusBalls + " " + this.getScore();
+        String bonusBallsForFrame = bonusBalls.isEmpty() ? "" : " Bonus Balls for frame: " + bonusBalls;
+        return "Balls for frame: " + balls + bonusBallsForFrame + " Score for Frame: " + this.getScore();
     }
 }

@@ -48,45 +48,48 @@ public class Game {
         }
     }
 
-    private void executeRules(Frame currentFrame) {
+    private void executeRules(@NotNull Frame currentFrame) {
         int playedBallsForFrame = currentFrame.getBalls().size();
         boolean isLastFrame = frames.size() == numberOfFrames;
 
         if (currentFrame.isStrike()) {
             currentFrame.setStrike(true);
             if (isLastFrame) {
-                if (playedBallsForFrame == numberOfBallsPerFrame + 1) {
-                    this.finished = true;
-                }
+                finishGame(playedBallsForFrame, numberOfBallsPerFrame + 1);
             } else {
-                currentFrame.setNumberOfBonusBalls(bonusBallsForStrike);
-                frames.add(new Frame(totalNumberOfPins, numberOfBallsPerFrame));
+                updateFrame(currentFrame, bonusBallsForStrike);
             }
         } else if (currentFrame.isFlaggedAsSpare()) {
             if (!currentFrame.isSpare()) {
                 currentFrame.setSpare(true);
             }
             if (isLastFrame) {
-                if (playedBallsForFrame == numberOfBallsPerFrame + 1) {
-                    this.finished = true;
-                }
+                finishGame(playedBallsForFrame, numberOfBallsPerFrame + 1);
             } else {
-                currentFrame.setNumberOfBonusBalls(bonusBallsForSpare);
-                frames.add(new Frame(totalNumberOfPins, numberOfBallsPerFrame));
+                updateFrame(currentFrame, bonusBallsForSpare);
             }
         } else if (currentFrame.isHole()) {
             currentFrame.setHole(true);
             if (isLastFrame) {
-                if (playedBallsForFrame == numberOfBallsPerFrame) {
-                    this.finished = true;
-                }
+                finishGame(playedBallsForFrame, numberOfBallsPerFrame);
             } else {
-                frames.add(new Frame(totalNumberOfPins, numberOfBallsPerFrame));
+                updateFrame(currentFrame, 0);
             }
         }
     }
 
-    private List<Frame> getAdjustedFrames() {
+    private void finishGame(int playedBallsForFrame, int numberOfBallsPerFrame) {
+        if (playedBallsForFrame == numberOfBallsPerFrame) {
+            this.finished = true;
+        }
+    }
+
+    private void updateFrame(Frame currentFrame, int numberOfBonusBalls) {
+        currentFrame.setNumberOfBonusBalls(numberOfBonusBalls);
+        frames.add(new Frame(totalNumberOfPins, numberOfBallsPerFrame));
+    }
+
+    private List<Frame> updateFramesBonus() {
         int totalNumberOfBalls = balls.size();
         AtomicInteger ballsIndex = new AtomicInteger();
         IntStream.range(0, frames.size()).forEach(i -> {
@@ -103,6 +106,6 @@ public class Game {
 
     public int calculateScore() {
 //        getAdjustedFrames().forEach(System.out::println);
-        return getAdjustedFrames().stream().mapToInt(Frame::getScore).sum();
+        return updateFramesBonus().stream().mapToInt(Frame::getScore).sum();
     }
 }

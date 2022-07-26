@@ -67,12 +67,12 @@ public class ConsoleUI {
 
             if (currentFrame.isFinished()) {
                 if (frameIndex <= config.numberOfFrames() - 2) {
-                    frameIndex++;
                     System.out.println();
                     System.out.print(ConsoleColors.BLUE_BOLD);
                     System.out.printf("FRAME NUMBER %d IS FINISHED AND YOUR CURRENT SCORE IS %d%n", frameIndex + 1, game.calculateScore());
                     System.out.println(ConsoleColors.RESET);
                     System.out.println(currentFrame);
+                    frameIndex++;
                     ballIndex = 0;
                 }
             }

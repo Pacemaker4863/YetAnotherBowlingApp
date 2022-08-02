@@ -87,9 +87,7 @@ public class Display {
     @NotNull
     public static List<String> displayGameList() {
         List<String> gameTypes = GameManager.getAllGameTypes();
-        IntStream.range(0, gameTypes.size()).forEach(i -> {
-            System.out.printf("\t%d. %s%n", i + 1, gameTypes.get(i));
-        });
+        IntStream.range(0, gameTypes.size()).forEach(i -> System.out.printf("\t%d. %s%n", i + 1, gameTypes.get(i)));
         return gameTypes;
     }
 

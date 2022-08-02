@@ -24,13 +24,8 @@ public class GameManager {
         return (game = new Game(configuration));
     }
 
-    public static boolean playAndValidates(int pins) {
-        var gameSize = game.getFrames().size();
-        var currentFrame = game.getFrames().get(gameSize - 1);
-        System.out.println(currentFrame);
+    public static void playAndValidates(int pins) {
         game.play(pins);
-        System.out.println(currentFrame);
-        return currentFrame.isValid();
     }
 
     public static boolean isGameFinished() {

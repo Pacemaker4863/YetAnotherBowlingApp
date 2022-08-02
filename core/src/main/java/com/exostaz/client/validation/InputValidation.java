@@ -1,5 +1,6 @@
 package com.exostaz.client.validation;
 
+import com.exostaz.client.ui.ConsoleColors;
 import com.exostaz.client.ui.Display;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
@@ -14,11 +15,14 @@ public class InputValidation {
     }
 
     public static int validateGameType(Scanner scanner, List<String> gameTypes) {
-        String type = "";
+        String type;
         do {
             Display.ask("Enter your configuration: ", true, false);
             type = scanner.next();
-        } while (!ofGameType(gameTypes, type));
+            if (!ofGameType(gameTypes, type)) {
+                System.err.print("wrong Entry, ");
+            } else break;
+        } while (true);
         return NumberUtils.toInt(type);
     }
 
@@ -27,11 +31,16 @@ public class InputValidation {
     }
 
     public static int validateShoot(Scanner scanner, int numberOfPins) {
-        String shoot = "";
+        String shoot;
+        String error = null;
         do {
-            Display.ask("Play: ", false, false);
+            String play = error != null ? String.format("%s%s, Please Play again: %s", ConsoleColors.RED_BOLD, error, ConsoleColors.RESET) : "Play: ";
+            Display.ask(play, false, false);
             shoot = scanner.next();
-        } while (!ofBall(shoot, numberOfPins));
+            if ((!ofBall(shoot, numberOfPins))) {
+                error = "Wrong entry";
+            } else break;
+        } while (true);
         return NumberUtils.toInt(shoot);
     }
 }

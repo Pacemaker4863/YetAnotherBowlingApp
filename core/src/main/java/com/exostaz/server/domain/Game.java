@@ -46,18 +46,7 @@ public class Game {
         if (gameIsNotFinished) {
             ballsForTheFrame.add(pins);
             balls.add(pins);
-
-            if (currentFrame.isValid()) {
-                System.out.println(balls.size());
-                System.out.println(ballsForTheFrame.size());
-                executeRules(currentFrame);
-            } else {
-                balls.remove(balls.size() - 1);
-                ballsForTheFrame.remove(ballsForTheFrame.size() - 1);
-                System.err.println("Frame is invalid: " + currentFrame);
-                System.err.println(balls.size());
-                System.err.println(ballsForTheFrame.size());
-            }
+            executeRules(currentFrame);
         }
     }
 

@@ -17,14 +17,13 @@ public class Console {
         Scanner scanner = new Scanner(System.in);
 
         List<String> gameTypes = Display.displayGameList();
-        // fixme it does not take into consideration the number of games
+
         Display.ask(String.format("Please choose your game (Enter 1 to %d): ", gameTypes.size()), true, true);
 
         int type = InputValidation.validateGameType(scanner, gameTypes);
         String gameChosen = gameTypes.get(type - 1);
         Configuration config = GameManager.getGameConfiguration(gameChosen);
 
-        // todo good choice
         Display.goodChoice(gameChosen);
 
         Game game = GameManager.createGame(config);
@@ -35,16 +34,11 @@ public class Console {
             var currentFrame = game.getFrames().get(frameIndex);
             Display.displayNewFrameStarted(frameIndex, ballIndex);
 
+            Display.displayFrameStatus(frameIndex,ballIndex);
             // minimal client validation
             int shoot = InputValidation.validateShoot(scanner, config.numberOfPins());
-
-            // pseudo server validation
-            while (!GameManager.playAndValidates(shoot)) {
-                System.err.println("Incorrect entry, re-enter a value: ");
-                Display.ask("Play: ", false, false);
-                // fixme no injection
-                shoot = scanner.nextInt();
-            }
+            // todo pseudo server validation
+            GameManager.playAndValidates(shoot);
             ballIndex++;
 
             if (currentFrame.isFinished()) {
